@@ -1,10 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 <header style="background:#ffffff; color:#2c3e50;">
     <div class="container" id="maincontent" tabindex="-1">
-        <div class="column">
-            <h3>ID de la maladie: {{pathology}}</h3>
-            <h3>ID du docteur: {{user}}</h3>
+        <div class="container">
+            <!-- Portfolio Item Heading -->
+            <h1 class="my-4">{{pathology.name}}
+                <small>{{pathology.other_name}}</small>
+            </h1>
+            <div class="row">
+
+                <div class="col-md-8">
+                    <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+                </div>
+                <div class="col-md-4">
+                    <h3 class="my-3">Info pathology</h3>
+                    <p>{{patoinfox}}</p>
+                    <h3 class="my-3">Project Details</h3>
+                    <p>{{icdmolecule}}</p>
+                    <p> {{array}}</p>
+                </div>
+              
+            </div>
+            
+            <!-- /.row -->
+
         </div>
+
     </div>
 </header>
 <!-- {% endblock%} -->

@@ -49,11 +49,41 @@ class Pathology(db.Model):
         self.updated_on = updated_on
         self.treatment = treatment
 
-    def __repr__(self):
-        return "<Pathology(pathology=%s)>" %(self.name)
 
-    def __str__(self):
-        return self.name
+class TreatmentCis(db.Model):
+    __tablename__="treatment_cis"
+    cis = db.Column(db.Integer,  primary_key=True)
+    pathology_name = db.Column(db.String(), unique=False)
+    icd_10 =  db.Column(db.String(), unique=False)
+
+    def __init__(self, cis, pathology_name, icd_10) :
+        self.cis = cis
+        self.pathology_name = pathology_name
+        self.icd_10 = icd_10
+
+class TreatmentClass(db.Model):
+    __tablename__ = "treatment_class"
+    class_id = db.Column(db.Integer(),  primary_key=True)
+    icd_10 = db.Column(db.String(), nullable=False)
+    pathology_name = db.Column(db.String(), nullable=False)
+
+class ClassClass(db.Model):
+    __tablename__ = "classes"
+    id = db.Column(db.Integer(),  primary_key=True)
+    name = db.Column(db.String(), nullable=False)
+
+
+class TreatmentMolecule(db.Model):
+    __tablename__ = 'treatment_molecule'
+    molecule_id = db.Column(db.Integer(), primary_key=True)
+    icd_10 = db.Column(db.String())
+    pathology_name = db.Column(db.String())
+
+class Medication(db.Model):
+    __tablename__ = 'medication'
+    cis = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String())
+    molecule_id = db.Column(db.Integer())
 
 
 class Specialty(db.Model):
