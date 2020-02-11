@@ -7,7 +7,7 @@ from wtforms import validators
 from .utils import *
 
 class PatientForm(FlaskForm):
-    pathology = SelectMultipleField("Pathologie", validators = [validators.InputRequired()], id = "pathology", choices = pathologyChoices())
+    pathology = SelectField("Pathologie", validators = [validators.InputRequired()], id = "pathology", choices = pathologyChoices())
     user = SelectField("Docteur", validators = [validators.InputRequired()], id = "user", choices = userChoices())
     submit = SubmitField("Valider")
 
@@ -15,5 +15,20 @@ class MedicForm(FlaskForm):
     submit = SubmitField("Valider")
 
 class linkedForm(FlaskForm):
-    choicelinked = SelectMultipleField("linkedchoice", validators = [validators.InputRequired()], id = "choicelinked", )
+    choicelinked = SelectField("choicelinked", validators=[validators.InputRequired()], id="choicelinked",choices=[] )
+    classx = SelectField("classx", validators=[validators.InputRequired()], id="classx",choices=[] )
+    Molecule = SelectField("Molecule", validators=[validators.InputRequired()], id="Molecule",choices=[] )
+    medicament = SelectField("medicament", validators=[validators.InputRequired()], id="medicament",choices=[] )
     submit = SubmitField("Valider")
+
+
+
+"""
+chaque choix on doit leur attribuer une classe precise pour la recuperer en fonction de son parent 
+class>Molecule>medicament
+puis affichage des selects en javascript 
+ou 
+si plus de temps
+Create dynamic select field flask javacript
+https://www.youtube.com/watch?v=I2dJuNwlIH0
+"""

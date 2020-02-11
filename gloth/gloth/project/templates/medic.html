@@ -8,21 +8,25 @@
             </h1>
             <div class="row">
 
-                <div class="col-md-8">
-                    <img class="img-fluid" src="http://placehold.it/750x500" alt="">
-                </div>
-                <div class="col-md-4">
+
+                <div class="col-md-12">
                     <h3 class="my-3">Info pathology</h3>
-                    <p>{{patoinfox}}</p>
+                    <p>{{pathologyname}}</p>
                     <h3 class="my-3">Project Details</h3>
-                    <p>icd
-                    {{icd}}</p>
-                    <p>classId:    
-                    {{array}}</p>
-                    <p>className:   
-                    {{patoinfox}}</p>
+                    <p>{{pathoInfo}}</p>
                 </div>
-              
+                <div class="col-md-12 lr" style="padding: 20px;">
+                 {{form.classx}}<br>
+                 {{form.Molecule}}<br>
+                 {{form.medicament}}
+                </div>
+                <div class="col-md-12">
+                <div class="col-md-12 adding">
+                 
+                   </div>
+                   <br>
+               <!-- <button class="btn btn-primary addingx" style="margin: auto;" >ajouter un medicament</button>-->
+                </div>
             </div>
             
             <!-- /.row -->
@@ -31,4 +35,496 @@
 
     </div>
 </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $( document ).ready(function() {
+      /*  var x =1;
+        $( ".addingx" ).click(function() {
+            $(".adding").append("<hr>");
+            $(".adding").append("Medicament"+x);
+            $(".adding").append($("#classx").clone());
+            $(".adding").append("<br>");
+            $(".adding").append($("#Molecule").clone());
+            $(".adding").append("<br>");
+            $(".adding").append($("#medicament").clone());
+            x++
+        });*/
+
+
+
+        $( "#classx" ).change(function() {
+            var val =$(this).val();
+            $("#Molecule option").css("display","block");
+            $("#Molecule option[value="+val+"]").not().css("display","none");
+        });
+        $( "#Molecule" ).change(function() {
+            var val =$(this).val();
+            $("#medicament option").css("display","block");
+            $("#medicament option[value="+val+"]").not().css("display","none");
+        });
+    });
+</script>
 <!-- {% endblock%} -->

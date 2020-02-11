@@ -72,6 +72,18 @@ class ClassClass(db.Model):
     id = db.Column(db.Integer(),  primary_key=True)
     name = db.Column(db.String(), nullable=False)
 
+class Molecule(db.Model):
+    __tablename__ = "molecules"
+    id = db.Column(db.Integer(),  primary_key=True)
+    name = db.Column(db.String(), nullable=False)
+
+class ClassFamille(db.Model):
+    __tablename__ = "classes_families"
+    molecule_id = db.Column(db.Integer(),  primary_key=True)
+    class_id = db.Column(db.Integer(), nullable=False)
+    family_name = db.Column(db.String(), nullable=False)
+    atc  = db.Column(db.String(), nullable=False)
+
 
 class TreatmentMolecule(db.Model):
     __tablename__ = 'treatment_molecule'

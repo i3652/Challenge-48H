@@ -45,7 +45,20 @@ def getPathologydescription(pathology):#description
 
 def getPathologyname(pathology):#name
     pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.name).first()
-    pathox = cleanchar(pathox)
+    pathox=str(pathox).replace('(','')
+    pathox=pathox.replace(')','')
+    pathox=pathox.replace(',','')
+    pathox=pathox.replace(']','')
+    pathox=pathox.replace('[','')
+    return pathox
+
+def getPathologyinfo(pathology):#name
+    pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.info).first()
+    pathox=str(pathox).replace('(','')
+    pathox=pathox.replace(')','')
+    pathox=pathox.replace(',','')
+    pathox=pathox.replace(']','')
+    pathox=pathox.replace('[','')
     return pathox
 
 def getPathologyIcd10(pathology):#icd10
@@ -105,10 +118,23 @@ def getTreatmentCisName(icd_10x):#pathology name
     return pathox
 #MEDICATIONE3333333333333333333333333333333333333333333333
 def getmedication(molecule_idx):#pathology name
-    pathox = Medication.query.filter_by(molecule_id=molecule_idx).with_entities(Medication.name).all()
-    pathox = cleanchar(pathox)
+    pathox = Medication.query.filter_by(molecule_id=molecule_idx).with_entities(Medication.name).all()  
+    return pathox
+#CLASSFamilleeeee3333333333333333333333333333333333333333333333
+def getClassFamilleMolecule(class_idx):#pathology name
+    pathox = ClassFamille.query.filter_by(class_id=class_idx).with_entities(ClassFamille.molecule_id).all()
+    pathox=str(pathox).replace('(','')
+    pathox=pathox.replace(')','')
+    pathox=pathox.replace(',','')
+    pathox=pathox.replace(']','')
+    pathox=pathox.replace('[','')
     return pathox
 
+#MOLECULE3333333333333333333333333333333333333333333333
+def getMoleculeName(id_Molecule):#pathology name
+    pathox = Molecule.query.filter_by(id=id_Molecule).with_entities(Molecule.name).all()
+    pathox = cleanchar(pathox)
+    return pathox
 
 
 def getPathology(pathology):
@@ -124,14 +150,89 @@ def cleanchar(strx):
 
 
 
-
+"""
 def getLinkedPatho(patho_id):
     icd_10 = getPathologyIcd10(patho_id)
     icdclass = getTreatmentClassid(icd_10)
     icdclassx = icdclass.split(' ')
-    pikachu=[]
-    rangex= range(0,len(icdclassx)-1)
-    for x in rangex:
-        pikachu+=getClassClassName(icdclassx[x])
-    return str(pikachu)
+    ClassAnti=[]
+    MoleculePara=[]
+    MedicamentDoli=[]
+    Result=[]
+    rangex=range(0,len(icdclassx)-1)
+    for x in rangex:#6
+        ClassAnti+=getClassClassName(icdclassx[x])#CLASS EXEMPLE: ANTIDOULEUR   
+        familleMolecule=getClassFamilleMolecule(icdclassx[x]).split(" ") 
+        rangex2=range(0,len(familleMolecule)-1)
+        for y in rangex2:
+            if familleMolecule[y]!="None":
+                MoleculePara+=getMoleculeName(familleMolecule[y])#molecule EXEMPLE: paracetamol
+                MedicamentDoli+=getmedication(familleMolecule[y])#medicament EXEMPLE: doliprane 
+                Result[str(ClassAnti[x]).replace(')','').replace('(','').replace(',','').replace("'","") , str(MoleculePara[y]).replace(')','').replace('(','').replace(',','').replace("'","") , str(MedicamentDoli[y]).replace(')','').replace('(','').replace(',','').replace("'","") ]
+    return Result
+"""
 
+
+def getLinkedMolecule(patho_id):
+    icd_10 = getPathologyIcd10(patho_id)
+    icdclass = getTreatmentClassid(icd_10)
+    icdclassx = icdclass.split(' ')
+    ClassAnti=[]
+    MoleculePara=[]
+    MedicamentDoli=[]
+    Result=[]
+    rangex=range(0,len(icdclassx)-1)
+    for x in rangex:#6
+        if icdclassx[x]!="None":
+            ClassAnti+=getClassClassName(icdclassx[x])#CLASS EXEMPLE: ANTIDOULEUR   
+            familleMolecule=getClassFamilleMolecule(icdclassx[x]).split(" ") 
+        rangex2=range(0,len(familleMolecule)-1)
+        for y in rangex2:
+            if familleMolecule[y]!="None":
+                MoleculePara+=getMoleculeName(familleMolecule[y])#molecule EXEMPLE: paracetamol
+                MedicamentDoli+=getmedication(familleMolecule[y])#medicament EXEMPLE: doliprane 
+                Result.append(( str(y),str(MoleculePara[y]).replace(')','').replace('(','').replace(',','').replace("'","") ))
+    return Result
+
+
+def getLinkedClass(patho_id):
+    icd_10 = getPathologyIcd10(patho_id)
+    icdclass = getTreatmentClassid(icd_10)
+    icdclassx = icdclass.split(' ')
+    ClassAnti=[]
+    MoleculePara=[]
+    MedicamentDoli=[]
+    Result=[]
+    rangex=range(0,len(icdclassx)-1)
+    for x in rangex:#6
+        if icdclassx[x]!="None":
+            ClassAnti+=getClassClassName(icdclassx[x])#CLASS EXEMPLE: ANTIDOULEUR   
+            familleMolecule=getClassFamilleMolecule(icdclassx[x]).split(" ") 
+        rangex2=range(0,len(familleMolecule)-1)
+        for y in rangex2:
+            if familleMolecule[y]!="None":
+                MoleculePara+=getMoleculeName(familleMolecule[y])#molecule EXEMPLE: paracetamol
+                MedicamentDoli+=getmedication(familleMolecule[y])#medicament EXEMPLE: doliprane 
+                Result.append(( str(x),str(ClassAnti[x]).replace(')','').replace('(','').replace(',','').replace("'","")  ))
+    return Result
+
+def getLinkedMedicament(patho_id):
+    icd_10 = getPathologyIcd10(patho_id)
+    icdclass = getTreatmentClassid(icd_10)
+    icdclassx = icdclass.split(' ')
+    ClassAnti=[]
+    MoleculePara=[]
+    MedicamentDoli=[]
+    Result=[]
+    rangex=range(0,len(icdclassx)-1)
+    for x in rangex:#6
+        if icdclassx[x]!="None":
+            ClassAnti+=getClassClassName(icdclassx[x])#CLASS EXEMPLE: ANTIDOULEUR   
+            familleMolecule=getClassFamilleMolecule(icdclassx[x]).split(" ") 
+        rangex2=range(0,len(familleMolecule)-1)
+        for y in rangex2:
+            if familleMolecule[y]!="None":
+                MoleculePara+=getMoleculeName(familleMolecule[y])#molecule EXEMPLE: paracetamol
+                MedicamentDoli+=getmedication(familleMolecule[y])#medicament EXEMPLE: doliprane 
+                Result.append((str(y),str(MedicamentDoli[y]).replace(')','').replace('(','').replace(',','').replace("'","")))
+    return Result
