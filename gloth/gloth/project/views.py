@@ -37,4 +37,4 @@ def medic():
     icdcis = getTreatmentCisName(icd_10)
     pathologydescription = getPathologydescription(patho_id)
     
-    return render_template("medic.html", name="Ynov",array=classx,patoinfox=pathologydescription,icdmolecule=icdmolecule)
+    return render_template("medic.html", name="Ynov",array=classx,patoinfox=icdclass,icdmolecule=icdmolecule,icd=icd_10)

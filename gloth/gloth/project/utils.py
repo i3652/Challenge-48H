@@ -50,14 +50,24 @@ def getPathologyname(pathology):#name
 
 def getPathologyIcd10(pathology):#icd10
     pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.icd_10).first()
-    pathox = cleanchar(pathox)
     return pathox
 
 #TREATMENTCLASS3333333333333333333333333333333333333333333333
+"""
 
+    pathox=str(pathox).replace('(','')
+    pathox=pathox.replace(')','')
+    pathox=pathox.replace(',','')
+    pathox=pathox.replace(']','')
+    pathox=pathox.replace('[','')
+"""
 def getTreatmentClassName(icd_10x):#pathology name
     pathox = TreatmentClass.query.filter_by(icd_10=icd_10x).with_entities(TreatmentClass.pathology_name).all()
-    pathox = cleanchar(pathox)
+    pathox=str(pathox).replace('(','')
+    pathox=pathox.replace(')','')
+    pathox=pathox.replace(',','')
+    pathox=pathox.replace(']','')
+    pathox=pathox.replace('[','')
     return pathox
 
 def getTreatmentClassx(icd_10x):#pathology name
@@ -118,9 +128,10 @@ def cleanchar(strx):
 def getLinkedPatho(patho_id):
     icd_10 = getPathologyIcd10(patho_id)
     icdclass = getTreatmentClassid(icd_10)
-    pikachuclass= []
-    idclass=icdclass.split(' ')
-    for i in range(len(icdclass)):
-        pikachuclass[i]=getClassClassName(idclass[i])
-    return str(pikachuclass)
+    icdclassx = icdclass.split(' ')
+    pikachu=[]
+    rangex= range(0,len(icdclassx)-1)
+    for x in rangex:
+        pikachu+=getClassClassName(icdclassx[x])
+    return str(pikachu)
 
