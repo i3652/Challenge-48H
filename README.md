@@ -6,10 +6,10 @@
 
 ## Author
 
-👤 **Dany JEAN-CHARLES (B2)**
-👤 **Théo GRELET (B2)**
-👤 **Mohamed Abdallahi ILLA (B1)**
-👤 **Régis GRUMBERGER (B3)**
+👤 **Dany JEAN-CHARLES (B2)** <br>
+👤 **Théo GRELET (B2)** <br> 
+👤 **Mohamed Abdallahi ILLA (B1)** <br>
+👤 **Régis GRUMBERGER (B3)** <br>
 
 
 * Github: [@Weder77](https://github.com/Weder77)
