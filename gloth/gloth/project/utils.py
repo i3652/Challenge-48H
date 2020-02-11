@@ -36,23 +36,24 @@ def userChoices():
     return choices
 
 
-#PATHOLOGY3333333333333333333333333333333333333333333333
-
-def getPathologydescription(pathology):#description
+# Renvoi la deescription de la pathologie
+def getPathologyDescription(pathology) :
     pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.description).first()
-    pathox = cleanchar(pathox)
     return pathox
 
+
+# Renvoi l
 def getPathologyname(pathology):#name
     pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.name).first()
-    pathox = cleanchar(pathox)
     return pathox
 
+
+# Renvoi l
 def getPathologyIcd10(pathology):#icd10
     pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.icd_10).first()
     return pathox
 
-#TREATMENTCLASS3333333333333333333333333333333333333333333333
+#
 """
 
     pathox=str(pathox).replace('(','')
@@ -61,6 +62,9 @@ def getPathologyIcd10(pathology):#icd10
     pathox=pathox.replace(']','')
     pathox=pathox.replace('[','')
 """
+
+
+# Renvoi l
 def getTreatmentClassName(icd_10x):#pathology name
     pathox = TreatmentClass.query.filter_by(icd_10=icd_10x).with_entities(TreatmentClass.pathology_name).all()
     pathox=str(pathox).replace('(','')
@@ -70,11 +74,15 @@ def getTreatmentClassName(icd_10x):#pathology name
     pathox=pathox.replace('[','')
     return pathox
 
+
+# Renvoi l
 def getTreatmentClassx(icd_10x):#pathology name
     pathox = TreatmentClass.query.filter_by(icd_10=icd_10x).with_entities(TreatmentClass.class_id).all()
     return pathox
 
-def getTreatmentClassid(icd_10x):#pathology name
+
+# Renvoi l
+def getTreatmentClassId(icd_10x):#pathology name
     pathox = TreatmentClass.query.filter_by(icd_10=icd_10x).with_entities(TreatmentClass.class_id).all()
     pathox=str(pathox).replace('(','')
     pathox=pathox.replace(')','')
@@ -83,55 +91,50 @@ def getTreatmentClassid(icd_10x):#pathology name
     pathox=pathox.replace('[','')
     return pathox
 
-def getClassClassName(idx):#pathology name
-    pathox = ClassClass.query.filter_by(id=idx).with_entities(ClassClass.name).first()
-    pathox = cleanchar(pathox)
-    return pathox
-#TREATMENTMOLECULE3333333333333333333333333333333333333333333333
 
-def getTreatmentMoleculeName(icd_10x):#pathology name
-    pathox = TreatmentMolecule.query.filter_by(icd_10=icd_10x).with_entities(TreatmentMolecule.pathology_name).all()
-    pathox = cleanchar(pathox)
-    return pathox
-
-def getTreatmentMoleculeid(icd_10x):#pathology name
-    pathox = TreatmentMolecule.query.filter_by(icd_10=icd_10x).with_entities(TreatmentMolecule.molecule_id).all()
-    pathox = cleanchar(pathox)
-    return pathox
-#TREATMENTMOLECULE3333333333333333333333333333333333333333333333
-def getTreatmentCisName(icd_10x):#pathology name
-    pathox = TreatmentCis.query.filter_by(icd_10=icd_10x).with_entities(TreatmentCis.pathology_name).all()
-    pathox = cleanchar(pathox)
-    return pathox
-#MEDICATIONE3333333333333333333333333333333333333333333333
-def getmedication(molecule_idx):#pathology name
-    pathox = Medication.query.filter_by(molecule_id=molecule_idx).with_entities(Medication.name).all()
-    pathox = cleanchar(pathox)
-    return pathox
+# Renvoi le nom de la classe
+def getClassClassName(classId) :
+    className = ClassClass.query.filter_by(id=classId).with_entities(ClassClass.name).first()
+    return className
 
 
-
-def getPathology(pathology):
-    pathox = Pathology.query.filter_by(id=pathology).with_entities(Pathology.name).first()
-    pathox = cleanchar(pathox)
-    return pathox
-
-
-def cleanchar(strx):
-    return strx
+# Renvoi le nom de la molécule
+def getTreatmentMoleculeName(icd_10x):
+    moleculeName = TreatmentMolecule.query.filter_by(icd_10=icd_10x).with_entities(TreatmentMolecule.pathology_name).all()
+    return moleculeName
 
 
+# Renvoi les IDs des molécules du traitement
+def getTreatmentMoleculeId(icd_10x):
+    moleculeId = TreatmentMolecule.query.filter_by(icd_10=icd_10x).with_entities(TreatmentMolecule.molecule_id).all()
+    return moleculeId
 
 
+# Renvoi les noms des médicaments
+def getTreatmentCisName(icd_10x):
+    cisName = TreatmentCis.query.filter_by(icd_10=icd_10x).with_entities(TreatmentCis.pathology_name).all()
+    return cisName
 
 
-def getLinkedPatho(patho_id):
-    icd_10 = getPathologyIcd10(patho_id)
-    icdclass = getTreatmentClassid(icd_10)
-    icdclassx = icdclass.split(' ')
-    pikachu=[]
-    rangex= range(0,len(icdclassx)-1)
-    for x in rangex:
-        pikachu+=getClassClassName(icdclassx[x])
-    return str(pikachu)
+# Renvoi les noms des médicaments
+def getMedication(molecule_idx):
+    mediName = Medication.query.filter_by(molecule_id=molecule_idx).with_entities(Medication.name).all()
+    return mediName
+
+
+# Renvoi la pathologie
+def getPathology(pathoId):
+    patho = Pathology.query.filter_by(id=pathoId).with_entities(Pathology.name).first()
+    return patho
+
+
+# Renvoi les IDs des
+def getLinkedPatho(pathoId):
+    icd_10 = getPathologyIcd10(pathoId)
+    icdClass = getTreatmentClassId(icd_10)
+    icdClassx = icdClass.split(' ')
+    strIds = []
+    for x in range(0, len(icdClassx)-1):
+        strIds += getClassClassName(icdClassx[x])
+    return str(strIds)
 
