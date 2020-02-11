@@ -73,8 +73,8 @@ def getTreatmentClassid(icd_10x):#pathology name
     pathox=pathox.replace('[','')
     return pathox
 
-def getClassClassName(icd_10x):#pathology name
-    pathox = ClassClass.query.filter_by(icd_10=icd_10x).with_entities(ClassClass.name).first()
+def getClassClassName(idx):#pathology name
+    pathox = ClassClass.query.filter_by(id=idx).with_entities(ClassClass.name).first()
     pathox = cleanchar(pathox)
     return pathox
 #TREATMENTMOLECULE3333333333333333333333333333333333333333333333
@@ -108,7 +108,6 @@ def getPathology(pathology):
 
 
 def cleanchar(strx):
-
     return strx
 
 

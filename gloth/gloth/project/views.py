@@ -27,13 +27,11 @@ def index():
 def medic():
   
     form = MedicForm(request.form)
-
-   
     patho_id = (request.form.get("pathology"))
     user_id = (request.form.get("user"))
     icd_10 = getPathologyIcd10(patho_id)
     arrax = getTreatmentClassid(icd_10)
-    classx=getLinkedPatho(icd_10)
+    classx=getLinkedPatho(patho_id)
     icdmolecule = getTreatmentMoleculeName(icd_10)
     icdclass = getTreatmentClassName(icd_10)
     icdcis = getTreatmentCisName(icd_10)
