@@ -2,7 +2,7 @@
 <p>
 </p>
 
-> Project made in Ynov, for a medical startup
+> Project made in Ynov, for a medical startup. We won at the 3th place !
 
 ## Author
 
